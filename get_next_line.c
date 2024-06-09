@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:00:36 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/08 16:19:26 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/09 10:19:25 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@
  * @param[in]	fd file descriptor
  */
 
-char	*get_next_line(int fd, char *p)
+char	*get_next_line(int fd)
 {
 	char	buf[1024];
+	static char	*p;
 
 	read(fd, buf, 100);
 	p = buf;
@@ -43,7 +44,7 @@ int	main(void)
 		printf("file open error!\n");
 		return (0);
 	}
-	p = get_next_line(fd, p);
+	p = get_next_line(fd);
 	write(1, p, 100);
 	close(fd);
 	return (0);
