@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:00:36 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/09 10:19:25 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/10 15:52:40 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 
 char	*get_next_line(int fd)
 {
-	char	buf[1024];
+	char	buf[BUFFER_SIZE];
 	static char	*p;
 
-	read(fd, buf, 100);
+	read(fd, buf, 3);
 	p = buf;
 	return (p);
 }
@@ -38,14 +38,14 @@ int	main(void)
 	int	fd;
 	char	*p;
 
-	fd = open("./test_open.txt", 0);
+	fd = open("./test_open_jp.txt", 0);
 	if (fd == -1)
 	{
 		printf("file open error!\n");
 		return (0);
 	}
 	p = get_next_line(fd);
-	write(1, p, 100);
+	write(1, p, 3);
 	close(fd);
 	return (0);
 }
