@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 11:59:55 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/10 16:06:39 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/11 14:14:00 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
-
+int	read_file(int fd, char *box);
+char	*get_next_line(int fd);
 #endif // GET_NEXT_LINE_H

@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:00:36 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/11 09:14:14 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/11 17:27:24 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,34 @@
  * @param[in]	fd file descriptor
  */
 
+int	read_file(int fd, char *box)
+{
+	ssize_t	len;
+	char	buf[BUFFER_SIZE];
+	int	i;
+
+	i = 0;
+	len = 0;
+	len = read(fd, buf, 1);
+	box[i] = *buf;
+	i++;
+	while (len > 0 && *buf != '\n')
+	{
+		len = len + read(fd, buf, 1);
+		box[i] = *buf;
+		i++;
+	}
+	return (len);
+}
+
 char	*get_next_line(int fd)
 {
-	static char	buf[BUFFER_SIZE];
-	static char	*p;
+	static char	p[BUFFER_SIZE];
+	ssize_t		len;
+	char		c;
 
-	read(fd, buf, BUFFER_SIZE);
-	p = buf;
+	len = read_file(fd, p);
+	p[len + 1] = '\0';
 	return (p);
 }
 
@@ -45,7 +66,11 @@ int	main(void)
 		return (0);
 	}
 	p = get_next_line(fd);
-	write(1, p, BUFFER_SIZE);
+	while (*p)
+	{
+		write(1, p, BUFFER_SIZE);
+		p++;
+	}
 	close(fd);
 	return (0);
 }
