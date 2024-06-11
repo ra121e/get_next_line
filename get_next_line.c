@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:00:36 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/11 17:57:38 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/11 22:26:31 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,24 @@
 int	read_file(int fd, char *box)
 {
 	ssize_t	len;
+	ssize_t len_check;
 	char	buf[BUFFER_SIZE];
-	int	i;
 
 	len = 0;
-	len = read(fd, buf, 1);
+	len_check = read(fd, buf, 1);
+	if (len_check < 0)
+		return (-1);
+	len = len_check;
 	*box = *buf;
 	box++;
-	while (len > 0 && *buf != '\n')
+	while (*buf != '\n')
 	{
-		len = len + read(fd, buf, 1);
+		len_check = read(fd, buf, 1);
+		if (len_check < 0)
+			return (-1);
+		if (len_check == 0)
+			return (0);
+		len = len + len_check;
 		*box = *buf;
 		box++;
 	}
@@ -48,7 +56,9 @@ char	*get_next_line(int fd)
 	ssize_t		len;
 
 	len = read_file(fd, p);
-	p[len + 1] = '\0';
+	if (len == -1 || len == 0)
+		return (NULL);
+	p[len - 1] = '\0';
 	return (p);
 }
 
@@ -63,11 +73,11 @@ int	main(void)
 		printf("file open error!\n");
 		return (0);
 	}
-	p = get_next_line(fd);
-	while (*p)
+	if (p == NULL)
+		return (0);
+	while (p = get_next_line(fd))
 	{
-		write(1, p, BUFFER_SIZE);
-		p++;
+		printf("%s\n", p);
 	}
 	close(fd);
 	return (0);
