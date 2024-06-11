@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:00:36 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/11 17:27:24 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/11 17:57:38 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,15 @@ int	read_file(int fd, char *box)
 	char	buf[BUFFER_SIZE];
 	int	i;
 
-	i = 0;
 	len = 0;
 	len = read(fd, buf, 1);
-	box[i] = *buf;
-	i++;
+	*box = *buf;
+	box++;
 	while (len > 0 && *buf != '\n')
 	{
 		len = len + read(fd, buf, 1);
-		box[i] = *buf;
-		i++;
+		*box = *buf;
+		box++;
 	}
 	return (len);
 }
@@ -47,7 +46,6 @@ char	*get_next_line(int fd)
 {
 	static char	p[BUFFER_SIZE];
 	ssize_t		len;
-	char		c;
 
 	len = read_file(fd, p);
 	p[len + 1] = '\0';
