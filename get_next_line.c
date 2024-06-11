@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:00:36 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/11 22:26:31 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/11 22:32:34 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,7 @@ int	main(void)
 		printf("file open error!\n");
 		return (0);
 	}
-	if (p == NULL)
-		return (0);
-	while (p = get_next_line(fd))
+	while ((p = get_next_line(fd)))
 	{
 		printf("%s\n", p);
 	}
