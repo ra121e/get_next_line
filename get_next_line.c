@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:00:36 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/12 17:46:03 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/12 21:54:04 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,14 @@ int	read_file(int fd, char **box)
 {
 	ssize_t	len;
 	ssize_t len_check;
-	char	buf[BUFFER_SIZE];
+	char	buf[BUFFER_SIZE + 1];
 	char	*new;
 
 	len = 0;
 	len_check = read(fd, buf, 1);
 	if (len_check < 0)
 		return (-1);
+	buf[len_check] = '\0';
 	len = len_check;
 	new = ft_strjoin(*box, buf);
 	free(*box);
@@ -107,6 +108,7 @@ int	read_file(int fd, char **box)
 			return (-1);
 		if (len_check == 0)
 			return (0);
+		buf[len_check] = '\0';
 		len = len + len_check;
 		new = ft_strjoin(*box, buf);
 		free(*box);
@@ -145,7 +147,7 @@ int	main(void)
 	while ((p = get_next_line(fd)))
 	{
 		printf("%s\n", p);
-		free(p);
+	//	free(p);
 	}
 	close(fd);
 	return (0);
