@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:00:36 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/12 16:56:15 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/12 17:46:03 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,20 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (ptr);
 }
 
+void	ft_bzero(void *s, size_t n)
+{
+	size_t			i;
+	unsigned char	*ptr;
+
+	ptr = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		*(ptr + i) = '\0';
+		i++;
+	}
+}
+
 int	read_file(int fd, char **box)
 {
 	ssize_t	len;
@@ -109,6 +123,7 @@ char	*get_next_line(int fd)
 	p = (char *)malloc(sizeof (char) * (BUFFER_SIZE + 1));
 	if (p == NULL)
 		return (NULL);
+	ft_bzero(p, BUFFER_SIZE + 1);
 	len = read_file(fd, &p);
 	if (len == -1 || len == 0)
 		return (NULL);
@@ -130,6 +145,7 @@ int	main(void)
 	while ((p = get_next_line(fd)))
 	{
 		printf("%s\n", p);
+		free(p);
 	}
 	close(fd);
 	return (0);
