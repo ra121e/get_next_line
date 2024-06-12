@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:00:36 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/12 16:40:18 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/12 16:56:15 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	read_file(int fd, char **box)
 		return (-1);
 	len = len_check;
 	new = ft_strjoin(*box, buf);
+	free(*box);
 	*box = new;
 	while (*buf != '\n')
 	{
@@ -94,6 +95,7 @@ int	read_file(int fd, char **box)
 			return (0);
 		len = len + len_check;
 		new = ft_strjoin(*box, buf);
+		free(*box);
 		*box = new;
 	}
 	return (len);
@@ -119,7 +121,7 @@ int	main(void)
 	int	fd;
 	char	*p;
 
-	fd = open("./longstring.txt", 0);
+	fd = open("./test_open.txt", 0);
 	if (fd == -1)
 	{
 		printf("file open error!\n");
