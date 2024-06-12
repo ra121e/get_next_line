@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 11:59:55 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/11 14:14:00 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/12 16:37:54 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@
 #endif // BUFFER_SIZE
 
 # include <unistd.h>
+# include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
-int	read_file(int fd, char *box);
+int	read_file(int fd, char **box);
 char	*get_next_line(int fd);
 #endif // GET_NEXT_LINE_H
