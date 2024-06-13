@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:00:36 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/12 21:54:04 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/13 09:56:17 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ int	main(void)
 	while ((p = get_next_line(fd)))
 	{
 		printf("%s\n", p);
-	//	free(p);
+		free(p);
 	}
 	close(fd);
 	return (0);
