@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:00:36 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/13 11:49:04 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/13 22:39:04 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,11 @@ int	read_file(int fd, char **box)
 	ssize_t len_check;
 	char	buf[BUFFER_SIZE + 1];
 	char	*new;
+	char	*pos_newline;
 
 	len = 0;
-	len_check = read(fd, buf, 1);
-	if (len_check < 0)
-		return (-1);
-	buf[len_check] = '\0';
-	len = len_check;
-	new = ft_strjoin(*box, buf);
-	free(*box);
-	*box = new;
-	while (*buf != '\n')
+	pos_newline = NULL;
+	while (pos_newline == NULL)
 	{
 		len_check = read(fd, buf, 1);
 		if (len_check < 0)
@@ -50,16 +44,41 @@ int	read_file(int fd, char **box)
 		len = len + len_check;
 		new = ft_strjoin(*box, buf);
 		free(*box);
+		pos_newline = ft_strchr(new, '\n');
 		*box = new;
 	}
+
+	//*box = pos_newline;
 	return (len);
 }
+
+char	*make_line(char *box)
+{
+	int	i;
+	char	*line;
+
+	i = 0;
+	while (box[i] != '\n' && box[i] != '\0')
+	{
+		i++;
+	}
+	line = ft_substr(box, 0, i);
+	return (line);
+}
+
+/**
+ * @fn char	*get_next_line(int fd)
+ * @brief
+ * @param[in]	fd file descriptor
+ */
 
 char	*get_next_line(int fd)
 {
 	char	*p;
 	ssize_t		len;
+	char	*line;
 
+	line = NULL;
 	p = (char *)malloc(sizeof (char) * (BUFFER_SIZE + 1));
 	if (p == NULL)
 		return (NULL);
@@ -68,5 +87,6 @@ char	*get_next_line(int fd)
 	if (len == -1 || len == 0)
 		return (NULL);
 	p[len - 1] = '\0';
-	return (p);
+	line = make_line(p);
+	return (line);
 }

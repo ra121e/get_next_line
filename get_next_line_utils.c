@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 11:15:45 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/13 11:19:34 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/13 21:20:03 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,22 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (ptr);
 }
 
+char	*ft_strchr(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i++;
+	}
+	if (s[i] == (char)c)
+		return ((char *)&s[i]);
+	return (NULL);
+}
+
 void	ft_bzero(void *s, size_t n)
 {
 	size_t			i;
@@ -72,4 +88,30 @@ void	ft_bzero(void *s, size_t n)
 		*(ptr + i) = '\0';
 		i++;
 	}
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char			*ptr;
+	size_t			len_s;
+
+	if (s == NULL)
+		return (NULL);
+	len_s = ft_strlen(s);
+	if (start >= len_s)
+	{
+		ptr = malloc(sizeof (char) * 1);
+		if (ptr == NULL)
+			return (NULL);
+		ptr[0] = '\0';
+		return (ptr);
+	}
+	if (len > len_s - start)
+		len = len_s - start;
+	ptr = (char *)malloc(sizeof (char) * (len + 1));
+	if (ptr == NULL)
+		return (NULL);
+	ft_memcpy(ptr, &s[start], len);
+	ptr[len] = '\0';
+	return (ptr);
 }
