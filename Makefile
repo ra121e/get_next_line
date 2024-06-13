@@ -1,14 +1,15 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    maketest                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/13 11:21:49 by athonda           #+#    #+#              #
-#    Updated: 2024/06/13 13:08:30 by athonda          ###   ########.fr        #
+#    Created: 2024/06/13 11:58:02 by athonda           #+#    #+#              #
+#    Updated: 2024/06/13 13:10:24 by athonda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME	=	libftgetnextline.a
 
@@ -25,9 +26,6 @@ $(NAME): $(OBJS)
 
 %o: %c get_next_line.h
 	cc $(CFLAGS) -c $< -o $@
-
-test: re
-	cc $(CFLAGS) -g3 -O0 -lbsd main.c $(NAME) -o test
 
 clean:
 	rm -f $(OBJS)
