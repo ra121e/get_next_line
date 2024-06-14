@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:00:36 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/14 17:06:43 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/14 18:56:03 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ char	*separate_line(char *box)
 	back = ft_substr(box, i + 1, ft_strlen(box) - i);
 	if (back == NULL)
 		return (NULL);
+	box[i] = '\0';
 	if (back[0] == '\0')
 	{
 		back = NULL;
 		return (NULL);
 	}
-	box[i] = '\0';
 	return (back);
 }
 

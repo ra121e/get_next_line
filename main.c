@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 11:48:25 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/14 17:07:41 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/14 19:04:57 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(void)
 	int	fd;
 	char	*p;
 
-	fd = open("./test_open.txt", 0);
+	fd = open("./test_open_short.txt", 0);
 	if (fd == -1)
 	{
 		printf("file open error!\n");

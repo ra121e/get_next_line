@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 11:59:55 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/14 17:28:16 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/14 18:56:56 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1
+# define BUFFER_SIZE 100
 #endif // BUFFER_SIZE
 
 # include <unistd.h>
