@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:00:36 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/13 22:39:04 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/14 17:06:43 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,47 +23,52 @@
  * @param[in]	fd file descriptor
  */
 
-int	read_file(int fd, char **box)
+char	*read_file(int fd, char *box)
 {
-	ssize_t	len;
 	ssize_t len_check;
 	char	buf[BUFFER_SIZE + 1];
-	char	*new;
-	char	*pos_newline;
+	char	*tmp;
+	char	*check_newline;
 
-	len = 0;
-	pos_newline = NULL;
-	while (pos_newline == NULL)
+	check_newline = NULL;
+	while (check_newline == NULL)
 	{
-		len_check = read(fd, buf, 1);
+		len_check = read(fd, buf, BUFFER_SIZE);
 		if (len_check < 0)
-			return (-1);
+			return (NULL);
 		if (len_check == 0)
-			return (0);
+			return (box);
 		buf[len_check] = '\0';
-		len = len + len_check;
-		new = ft_strjoin(*box, buf);
-		free(*box);
-		pos_newline = ft_strchr(new, '\n');
-		*box = new;
+		if (box == NULL)
+			box = ft_strdup("");
+		tmp = box;
+		box = ft_strjoin(tmp, buf);
+		free(tmp);
+		check_newline = ft_strchr(box, '\n');
 	}
-
-	//*box = pos_newline;
-	return (len);
+	return (box);
 }
 
-char	*make_line(char *box)
+char	*separate_line(char *box)
 {
 	int	i;
-	char	*line;
+	char	*back;
 
 	i = 0;
 	while (box[i] != '\n' && box[i] != '\0')
 	{
 		i++;
 	}
-	line = ft_substr(box, 0, i);
-	return (line);
+	back = ft_substr(box, i + 1, ft_strlen(box) - i);
+	if (back == NULL)
+		return (NULL);
+	if (back[0] == '\0')
+	{
+		back = NULL;
+		return (NULL);
+	}
+	box[i] = '\0';
+	return (back);
 }
 
 /**
@@ -74,19 +79,13 @@ char	*make_line(char *box)
 
 char	*get_next_line(int fd)
 {
-	char	*p;
-	ssize_t		len;
+	static char	*p;
 	char	*line;
 
 	line = NULL;
-	p = (char *)malloc(sizeof (char) * (BUFFER_SIZE + 1));
-	if (p == NULL)
+	line = read_file(fd, p);
+	if (line == NULL)
 		return (NULL);
-	ft_bzero(p, BUFFER_SIZE + 1);
-	len = read_file(fd, &p);
-	if (len == -1 || len == 0)
-		return (NULL);
-	p[len - 1] = '\0';
-	line = make_line(p);
+	p = separate_line(line);
 	return (line);
 }

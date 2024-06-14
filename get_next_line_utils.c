@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 11:15:45 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/13 21:20:03 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/14 16:43:58 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,24 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-void	ft_bzero(void *s, size_t n)
+char	*ft_strdup(const char *s)
 {
-	size_t			i;
-	unsigned char	*ptr;
+	char	*ptr;
+	int		len;
+	int		i;
 
-	ptr = (unsigned char *)s;
+	len = ft_strlen(s);
+	ptr = (char *)malloc(sizeof (char) * len + 1);
+	if (ptr == NULL)
+		return (NULL);
 	i = 0;
-	while (i < n)
+	while (s[i] != '\0')
 	{
-		*(ptr + i) = '\0';
+		ptr[i] = s[i];
 		i++;
 	}
+	ptr[i] = '\0';
+	return (ptr);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
