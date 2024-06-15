@@ -6,21 +6,22 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 11:59:55 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/14 18:56:56 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/15 08:57:11 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 100
-#endif // BUFFER_SIZE
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 100
+# endif // BUFFER_SIZE
 
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
+
 char	*read_file(int fd, char *box);
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
