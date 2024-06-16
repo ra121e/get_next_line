@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:00:36 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/16 11:41:16 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/16 13:50:42 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,14 @@ char	*read_file(int fd, char *box)
 			return (box);
 		buf[len_check] = '\0';
 		if (box == NULL)
+		{
 			box = ft_strdup("");
+		}
 		tmp = box;
 		box = ft_strjoin(tmp, buf);
+		free(tmp);
 		if (box == NULL)
 			return (NULL);
-		free(tmp);
 		check_newline = ft_strchr(box, '\n');
 	}
 	return (box);
