@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:00:36 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/15 09:55:52 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/16 11:41:16 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ char	*read_file(int fd, char *box)
 			box = ft_strdup("");
 		tmp = box;
 		box = ft_strjoin(tmp, buf);
+		if (box == NULL)
+			return (NULL);
 		free(tmp);
 		check_newline = ft_strchr(box, '\n');
 	}
@@ -62,13 +64,13 @@ char	*separate_line(char *box)
 	back = ft_substr(box, i + 1, ft_strlen(box) - i);
 	if (back == NULL)
 		return (NULL);
-	box[i + 1] = '\0';
 	if (back[0] == '\0')
 	{
 		free(back);
 		back = NULL;
 		return (NULL);
 	}
+	box[i + 1] = '\0';
 	return (back);
 }
 
@@ -86,7 +88,14 @@ char	*get_next_line(int fd)
 	line = NULL;
 	line = read_file(fd, p);
 	if (line == NULL)
+	{
+		if (p != NULL)
+		{
+			free(p);
+			p = NULL;
+		}
 		return (NULL);
+	}
 	p = separate_line(line);
 	return (line);
 }
