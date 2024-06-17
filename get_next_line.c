@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:00:36 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/17 19:44:52 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/17 22:48:28 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*read_file(int fd, char *box)
 	return (box);
 }
 
-char	*separate_line(char *box)
+char	*separate_back(char *box)
 {
 	int		i;
 	char	*back;
@@ -75,11 +75,31 @@ char	*separate_line(char *box)
 		back = NULL;
 		return (NULL);
 	}
-	if (box[i] == '\n')
-		box[i + 1] = '\0';
 	return (back);
 }
 
+char	*separate_front(char *box)
+{
+	int		i;
+	char	*front;
+
+	i = 0;
+	while (box[i] != '\n' && box[i] != '\0')
+		i++;
+	if (box[i] == '\n')
+	{
+		front = ft_substr(box, 0, i + 1);
+		if (front == NULL)
+			return (NULL);
+	}
+	else
+	{
+		front = ft_substr(box, 0, i);
+		if (front == NULL)
+			return (NULL);
+	}
+	return (front);
+}
 /**
  * @fn char	*get_next_line(int fd)
  * @brief
@@ -89,11 +109,12 @@ char	*separate_line(char *box)
 char	*get_next_line(int fd)
 {
 	static char	*p;
+	char		*str;
 	char		*line;
 
-	line = NULL;
-	line = read_file(fd, p);
-	if (line == NULL)
+	str = NULL;
+	str = read_file(fd, p);
+	if (str == NULL)
 	{
 		if (p != NULL)
 		{
@@ -102,6 +123,8 @@ char	*get_next_line(int fd)
 		}
 		return (NULL);
 	}
-	p = separate_line(line);
+	line = separate_front(str);
+	p = separate_back(str);
+	free(str);
 	return (line);
 }
