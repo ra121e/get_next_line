@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:00:36 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/17 17:22:40 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/17 19:44:52 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ char	*read_file(int fd, char *box)
 		box = ft_strjoin(tmp, buf);
 		free(tmp);
 		//tmp = NULL;
-		//if (box == NULL)
-		//	return (NULL);
+		if (box == NULL)
+			return (NULL);
 		check_newline = ft_strchr(box, '\n');
 	}
 	return (box);
