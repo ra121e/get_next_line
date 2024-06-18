@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:00:36 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/18 14:35:52 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/18 20:29:17 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,21 +112,17 @@ char	*get_next_line(int fd)
 	if (str == NULL)
 	{
 		if (p != NULL)
-		{
 			free(p);
-			p = NULL;
-		}
+		p = NULL;
 		return (NULL);
 	}
 	line = separate_front(str);
 	if (line == NULL)
 	{
 		if (str != NULL)
-		{
 			free(str);
-			str = NULL;
-			p = NULL;
-		}
+		str = NULL;
+		p = NULL;
 		return (NULL);
 	}
 	p = separate_back(str);
