@@ -6,13 +6,13 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:00:36 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/17 22:48:28 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/18 14:35:52 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /**
  * @file get_next_line.c
- * @brief write a function that returns a line read from a file descriptor
+ * @brief returns a line extracted from text, which read by file descriptor
  */
 
 #include "get_next_line.h"
@@ -40,15 +40,10 @@ char	*read_file(int fd, char *box)
 			return (box);
 		buf[len_check] = '\0';
 		if (box == NULL)
-		{
 			box = ft_strdup("");
-		//	if (box == NULL)
-		//		return (NULL);
-		}
 		tmp = box;
 		box = ft_strjoin(tmp, buf);
 		free(tmp);
-		//tmp = NULL;
 		if (box == NULL)
 			return (NULL);
 		check_newline = ft_strchr(box, '\n');
@@ -124,6 +119,16 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	line = separate_front(str);
+	if (line == NULL)
+	{
+		if (str != NULL)
+		{
+			free(str);
+			str = NULL;
+			p = NULL;
+		}
+		return (NULL);
+	}
 	p = separate_back(str);
 	free(str);
 	return (line);
