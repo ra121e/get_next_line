@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 11:48:25 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/20 10:53:41 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/20 13:53:57 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(void)
 		printf("%s", p);
 		free(p);
 	}
+	close(fd);
 	fd = open("./variable_nls.txt", 0);
 	if (fd == -1)
 	{
@@ -100,6 +101,5 @@ int	main(void)
 		free(p);
 	}
 	close(fd);
-
 	return (0);
 }

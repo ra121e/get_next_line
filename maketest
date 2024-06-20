@@ -6,17 +6,23 @@
 #    By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/13 11:21:49 by athonda           #+#    #+#              #
-#    Updated: 2024/06/13 22:43:19 by athonda          ###   ########.fr        #
+#    Updated: 2024/06/20 13:56:37 by athonda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	libftgetnextline.a
 
-CFLAGS	=	-Wall -Werror -Wextra -g3 -O0
+NAME_B	=	libftgetnextline_bonus.a
+
+CFLAGS	=	-Wall -Werror -Wextra
 
 SRCS	=	get_next_line.c get_next_line_utils.c
 
+SRCS_B	=	get_next_line_bonus.c get_next_line_utils_bonus.c
+
 OBJS	=	$(patsubst %c,%o,$(SRCS))
+
+OBJS_B	=	$(patsubst %c,%o,$(SRCS_B))
 
 all: $(NAME)
 
@@ -26,15 +32,25 @@ $(NAME): $(OBJS)
 %o: %c get_next_line.h
 	cc $(CFLAGS) -c $< -o $@
 
+bonus: $(NAME_B)
+
+$(NAME_B): $(OBJS_B)
+	ar rcs $@ $?
+
 test: re
-	cc $(CFLAGS) -o test main.c $(NAME)
+	cc $(CFLAGS) main.c $(NAME) -o test
+
+testbonus: rebonus
+	cc $(CFLAGS) main_bonus.c $(NAME_B) -o test
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(OBJS_B)
 
 fclean:
-	rm -f $(OBJS) $(NAME)
+	rm -f $(OBJS) $(NAME) $(OBJS_B) $(NAME_B)
 
 re: fclean all
+
+rebonus: fclean bonus
 
 .PHONY: all clean fclean re
