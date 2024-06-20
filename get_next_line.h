@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 11:59:55 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/18 20:34:16 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/20 16:05:47 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include <stdio.h>
 
 char	*read_file(int fd, char *box);
 char	*separate_back(char *box);
