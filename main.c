@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 11:48:25 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/16 11:11:00 by athonda          ###   ########.fr       */
+/*   Updated: 2024/06/20 10:53:41 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,67 @@ int	main(void)
 		printf("%s", p);
 		free(p);
 	}
+	fd = open("./variable_nls.txt", 0);
+	if (fd == -1)
+	{
+		printf("file open error!\n");
+		return (0);
+	}
+	while ((p = get_next_line(fd)))
+	{
+		printf("%s", p);
+		free(p);
+	}
 	close(fd);
-	fd = open("./test_open.txt", 0);
+	fd = open("./test_open_nl.txt", 0);
+	if (fd == -1)
+	{
+		printf("file open error!\n");
+		return (0);
+	}
+	while ((p = get_next_line(fd)))
+	{
+		printf("%s", p);
+		free(p);
+	}
+	close(fd);
+	fd = open("./test_open_1char.txt", 0);
+	if (fd == -1)
+	{
+		printf("file open error!\n");
+		return (0);
+	}
+	while ((p = get_next_line(fd)))
+	{
+		printf("%s", p);
+		free(p);
+	}
+	close(fd);
+	fd = open("./test_open_1char.txt", 0);
+	if (fd == -1)
+	{
+		printf("file open error!\n");
+		return (0);
+	}
+	while ((p = get_next_line(fd)))
+	{
+		printf("%s", p);
+		free(p);
+	}
+	close(fd);
+	fd = open("./test_one_newline.txt", 0);
+	if (fd == -1)
+	{
+		printf("file open error!\n");
+		return (0);
+	}
+	while ((p = get_next_line(fd)))
+	{
+		printf("%s", p);
+		free(p);
+	}
+	close(fd);
+	fd = open("./test_open_none.txt", 0);
 	if (fd == -1)
 	{
 		printf("file open error!\n");
