@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:00:36 by athonda           #+#    #+#             */
-/*   Updated: 2024/06/18 20:29:17 by athonda          ###   ########.fr       */
+/*   Updated: 2024/07/02 21:40:26 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@
 #include "get_next_line.h"
 
 /**
- * @fn char	*get_next_line(int fd)
+ * @fn char	*read_file(int fd, char *box)
  * @brief
  * @param[in]	fd file descriptor
+ * @param[in,out] box rest of previous string, append buffer for new string
+ * @return box string including "\n"
+ * @retval NULL read() return -1 means error, and malloc fail in strjoin()
+ * @retval box read() return 0 means no more data in the file
  */
 
 char	*read_file(int fd, char *box)
@@ -51,6 +55,14 @@ char	*read_file(int fd, char *box)
 	return (box);
 }
 
+/**
+ * @fn *separate_back(char *box)
+ * @brief extract backward of string
+ * @param[in] box string including "\n"
+ * @return substring behind "\n" or NULL in case of no "\n"
+ * @retval NULL in case of no "\n", and malloc fail in substr()
+ */
+
 char	*separate_back(char *box)
 {
 	int		i;
@@ -72,6 +84,14 @@ char	*separate_back(char *box)
 	}
 	return (back);
 }
+
+/**
+ * @fn *separate_front(char *box)
+ * @brief extract forward of string
+ * @param[in] box string read from text including "\n"
+ * @return front substring before "\n"
+ * @retval NULL malloc fail in substr()
+ */
 
 char	*separate_front(char *box)
 {
@@ -95,10 +115,18 @@ char	*separate_front(char *box)
 	}
 	return (front);
 }
+
 /**
  * @fn char	*get_next_line(int fd)
- * @brief
+ * @brief get string from file and return line until "\n"
  * @param[in]	fd file descriptor
+ * @return substring line extracted as the front part
+ * @retval NULL read() error, malloc fail cases
+ * @attention manage free and NULL
+ * @note
+ *	- read_file(): make string with p and read()
+ *	- separate_back(): extract substring as "p" backward since "\n"
+ *	- separate_front(): extract substring as "line" untill "\n"
  */
 
 char	*get_next_line(int fd)
